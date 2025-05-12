@@ -1,8 +1,13 @@
 services:
   - type: web
     name: my-laravel-app
-    env: php
-    runtime: php-8.2
-    buildCommand: 'composer install'
-    startCommand: 'php artisan serve --host=0.0.0.0 --port=80'
+    env: node   # Use Node.js environment as a fallback
+    buildCommand: |
+      echo "Installing PHP dependencies"
+      curl -sS https://getcomposer.org/installer | php
+      php composer.phar install
+    startCommand: |
+      echo "Starting Laravel"
+      php artisan migrate --force   # Run migrations (optional)
+      php artisan serve --host=0.0.0.0 --port=80
     plan: starter
