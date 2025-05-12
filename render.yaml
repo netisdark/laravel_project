@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: my-laravel-app
+    env: php
+    buildCommand: 'composer install'
+    startCommand: 'php artisan serve'
+    plan: starter
